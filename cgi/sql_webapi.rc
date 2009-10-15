@@ -1,0 +1,6 @@
+{
+  "database": "user.db",
+  "access_control": {
+    "skalde": { "m_content":[1,1], "m_author":[1,1],"m_date":[1,1],"m_style":[1,1],"m_id":[1,1],"m_status":[1,1],"m_x":[1,1], "m_y":[1,1], "m_z":[1,1], "m_width":[1,1],"m_height":[1,1], "*": [1,1]}
+  }
+}
