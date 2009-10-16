@@ -5,7 +5,17 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig = function( config )
 {
-	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
+    config.toolbar = 'MyToolbar';
+
+    config.toolbar_MyToolbar =
+    [
+        ['NewPage','Preview'],
+        ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+        '/',
+        ['Styles','Format'],
+        ['Bold','Italic','Strike'],
+        ['Link','Unlink','Anchor'],
+        ['Maximize','-','About']
+    ];
 };
+
