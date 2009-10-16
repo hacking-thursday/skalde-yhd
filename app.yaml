@@ -6,6 +6,8 @@ api_version: 1
 default_expiration: "1d"
 
 handlers:
+- url: /html
+  static_dir: assets/html
 - url: /lib
   static_dir: assets/lib
 - url: /css
