@@ -233,8 +233,8 @@ Skalde.prototype.push = function(){
 			other_list.each( function(item){
                 var url = this.cgipath + status_list[item.m_status];
                 item._init = '';
-                item_list = [];
-                item_list.append(Json.toString(item));
+                json_data = Json.toString(item);
+                item_list = [json_data];
 				new Ajax( url , {
 					method:'post',
 					data: item_list,
