@@ -23,13 +23,13 @@ Skalde.prototype._init = function ()
   /**Aggregations: */
 
   /**Compositions: */
-  this.cgipath = "/message/create";
+  this.cgipath = "/message/";
 }
 
 
 Skalde.prototype.hasNew = function(){
 
-	var news = this.listPostit(function(item){ return item.m_status=="new";});
+	var news = this.listPostit(function(item){ return item.m_status=="add";});
 
 	return news.length > 0;
 }
@@ -140,7 +140,7 @@ Skalde.prototype.delPostit = function (id)
 	this.m_postits.each( function(item){
 		if( item.m_id == id )
 		{
-			item.m_status = "deleted";
+			item.m_status = "del";
 		}
 	});
 }
@@ -201,14 +201,10 @@ Skalde.prototype.updatePostit = function (id, data)
  */
 Skalde.prototype.pull = function ()
 {
-
-	//var query = "SELECT * FROM skalde ORDER BY m_id ASC LIMIT 200 ";
-	var query = "SELECT * FROM skalde ";
-
-	var ajax = new Ajax( this.cgipath, {
+	var ajax = new Ajax( this.cgipath + 'list', {
 		method:'get',
 		onComplete: function(response){
-			var result = Json.evaluate( response ).query0;
+			var result = Json.evaluate( response );
 			result.each( this.addPostit, this );
 			this.update.delay( 1000,this);
 		}.bind(this)
@@ -216,27 +212,28 @@ Skalde.prototype.pull = function ()
 	//ajax.setHeader('Cache-Control','no-cache');
 	//ajax.setHeader('Pragma','No-cache');
 	ajax.setHeader('If-Modified-Since','0');
-	ajax.request({'query': query});
+	ajax.request();
 }
 
 
 /**
- * 根據指定的編號的物件資料寫回 Server。若沒有指定，則寫回所有具 "changed", "deleted", "new" 狀態的物件。
+ * 根據指定的編號的物件資料寫回 Server。若沒有指定，則寫回所有具 "edit", "del", "add" 狀態的物件。
  * @param ids
     *      指定的編號
  */
 Skalde.prototype.push = function(){
+        var status_need = ['add', 'edit', 'del'];
+        var status_list = {'add':'create', 'edit': 'update', 'del': 'delete'};
 
 		var other_list = this.m_postits.filter( function( item ){
-			return ( item.m_status == "new" || item.m_status == "changed" );
+			return ( status_need.indexOf(item.m_status) > -1 );
 		});
 
 		if( other_list.length > 0 )
 		{
 			other_list.each( function(item){
-				var query = "INSERT INTO skalde( m_content,m_author,m_date,m_style,m_x,m_y,m_z,m_width,m_height) VALUES ('"+item.m_content+"','"+item.m_author+"','"+item.m_date+"','"+item.m_style+"','"+item.m_x+"','"+item.m_y+"','"+item.m_z+"','"+item.m_width+"','"+item.m_height+"')";
-
-				new Ajax( '/message/create', {
+                var url = this.cgipath + status_list[item.m_status];
+				new Ajax( url , {
 					method:'post',
 					data: query,
 					onComplete: function(){
