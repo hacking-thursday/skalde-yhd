@@ -46,7 +46,7 @@ Editor = function ( options )
         <div id="msgbox_m" style="z-index:3;">\
                 <div id="msgbox_ml">\
 		<div id="msgbox_mr">\
-		  <form id="editor" name="editor"><div style="width:370px;"><div id="postit_txt" name="postit_txt">FCKEditor++</div></div><div><span><input type="text" id="postit_author" name="postit_author" value="你的名字"/></span><img id="apply" src="image/apply_f2.png"/><img id="cancel" src="image/cancel_f2.png"/></div></form>\
+		  <form id="editor" name="editor">inputs ur msg</form>\
 		</div>\
                 </div>\
         </div>\
@@ -56,17 +56,25 @@ Editor = function ( options )
                 </div>\
         </div>\
 </div>\
-  ')
+  ');
+	var oCKeditor = CKEDITOR.replace( 'editor',
+				{
+					// Defines a simpler toolbar to be used in this sample.
+					// Note that we have added out "MyButton" button here.
+					toolbar : [ [ 'Bold', 'Italic', 'Underline', 'Strike','-','Link' ] ]
+				});
 
-  var oFCKeditor = new FCKeditor( 'postit_content' ) ;
-  oFCKeditor.BasePath	= "lib/fckeditor/";
-  oFCKeditor.ToolbarSet = "Skalde";
-  oFCKeditor.Height	= 120;
-  oFCKeditor.Width	= 300 ;
-  oFCKeditor.Value	= '請輸入你的留言' ;
+
+
+   //var oFCKeditor = new CKeditor( 'postit_content' ) ;
+  //oFCKeditor.BasePath	= "lib/ckeditor/";
+  //oFCKeditor.ToolbarSet = "Skalde";
+  //oFCKeditor.Height	= 120;
+  //oFCKeditor.Width	= 300 ;
+  //oFCKeditor.Value	= '請輸入你的留言' ;
   if( this.view.getElementsBySelector('#postit_txt').length )
   {
-	  this.view.getElementsBySelector('#postit_txt')[0].setHTML( oFCKeditor.CreateHtml() );
+      this.view.getElementsBySelector('#postit_txt')[0].setHTML( oCKeditor.CreateHtml() );
   }
 
   this.view.setProperty('id', 'editordiv' );
@@ -78,10 +86,10 @@ Editor = function ( options )
 
   if( window.ie )
   {
-	  this.view.getElementsBySelector('#msgbox_b').setStyle('display','none');
-	  this.view.getElementsBySelector('#msgbox_t').setStyle('display','none');
-	  this.view.getElementsBySelector('#msgbox_b').setStyle('margin',0);
-	  this.view.getElementsBySelector('#msgbox_t').setStyle('margin',0);
+      this.view.getElementsBySelector('#msgbox_b').setStyle('display','none');
+      this.view.getElementsBySelector('#msgbox_t').setStyle('display','none');
+      this.view.getElementsBySelector('#msgbox_b').setStyle('margin',0);
+      this.view.getElementsBySelector('#msgbox_t').setStyle('margin',0);
   }
 
   //this.view.getElementByID('button').addEvent('click', this.submit.bind(this) );
@@ -91,14 +99,14 @@ Editor = function ( options )
   $('editor').addEvent('submit', this.submit.bind(this) );
 
   $('postit_author').addEvent('click', function( evt ){ 
-	  var event = new Event( evt );
-	  event.stop();
+      var event = new Event( evt );
+      event.stop();
 
-	  this.focus(); 
+      this.focus(); 
           if( this.getProperty('value') == "你的名字" )
-	  {
-		  this.setProperty('value','');
-	  }
+      {
+    	  this.setProperty('value','');
+      }
   
   } );
 
@@ -119,11 +127,13 @@ Editor = function ( options )
 		  this.top = wall_pos.top;
 		  this.x = real_xy.x;
 		  this.y = real_xy.y;
+			consol.log(1);
 	  }.bind(this)
   });
 
   this.view.addEvent('click', function(e){
 	  var event = new Event(e);
+			consol.log(2);
 
 	  // Stop this event from propagating to Wall and trigger another Editor
 	  event.stop();
@@ -171,7 +181,7 @@ Editor.prototype.submit = function ( evt )
 	event.stop();
 
 	var form = $('editor');
-	var oEditor = FCKeditorAPI.GetInstance('postit_content') ;
+	var oEditor = CKeditorAPI.GetInstance('postit_content') ;
 
 	var input = oEditor.EditorDocument.body.innerHTML.slice( 3, -8);
 	//console.log(input);
@@ -195,7 +205,7 @@ Editor.prototype.submit = function ( evt )
 	message.m_author= form.postit_author.value ;
 	// Remember to adjust time unit to sec
 	message.m_date = Math.round( (new Date).getTime()/1000 ); 
-	message.m_status = "add";
+	message.m_status = "new";
 	message.bubble = true;
 	message.m_x= this.x +20;
 	message.m_y= this.y -70;
