@@ -236,13 +236,14 @@ Skalde.prototype.push = function(){
 			other_list.each( function(item){
 				var query = "INSERT INTO skalde( m_content,m_author,m_date,m_style,m_x,m_y,m_z,m_width,m_height) VALUES ('"+item.m_content+"','"+item.m_author+"','"+item.m_date+"','"+item.m_style+"','"+item.m_x+"','"+item.m_y+"','"+item.m_z+"','"+item.m_width+"','"+item.m_height+"')";
 
-				new Ajax( this.cgipath, {
-					method:'get',
+				new Ajax( '/message/create', {
+					method:'post',
+					data: query,
 					onComplete: function(){
 						var sk = new Skalde();
 						sk.pull();
 					}
-				}).request({'query': query});
+				}).request();
 			},this);
 		}
 
