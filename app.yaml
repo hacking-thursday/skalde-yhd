@@ -1,0 +1,39 @@
+application: skalde
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /
+  script: index.py
+- url: /message/.*
+  script: index.py
+- url: /lib
+  static_dir: ui/lib
+- url: /html
+  static_dir: ui/html
+- url: /lib
+  static_dir: ui/lib
+- url: /css
+  static_dir: ui/css
+- url: /js
+  static_dir: ui/js
+- url: /image
+  static_dir: ui/image
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+- url: /
+  static_files: ui/index.html
+  upload: ui/index.html
+- url: /test.html
+  static_files: ui/test.html
+  upload: ui/index.html
+- url: /skalde.js
+  static_files: ui/skalde.js
+  upload: ui/skalde.js
+
+
