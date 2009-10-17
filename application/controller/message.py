@@ -1,10 +1,11 @@
 import cgi,pickle
+import logging
 
 from google.appengine.ext import db
 
 from gaeo.controller import BaseController
 
-from application.model.message import Message
+from model.message import Message
 
 
 class MessageController(BaseController):
@@ -14,23 +15,26 @@ class MessageController(BaseController):
         2. use model to save
         3. return json
         """
-        data = self.to_json(self.params['json'])
-        message = Message(data=pickle.dumps(data[0]))
+        user_data = self.params['json']
+        data = user_data
+        message = Message(data=user_data)
         message.put()
-        data[0]['m_id'] = message.key()
-        message.data = pickle.dumps(data[0])
+        message.data = data
         message.put()
-        self.render(data)
 
     def delete(self):
         pass
 
     def read(self):
         """
+        0. get message key
         1. read model data
         2. return json
         """
-        pass
+        key = self.params['key']
+        message = Message.get(key)
+        data = message.data
+        self.render(data)
 
     def update(self):
         pass
