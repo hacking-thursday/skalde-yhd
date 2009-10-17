@@ -233,16 +233,18 @@ Skalde.prototype.push = function(){
 			other_list.each( function(item){
                 var url = this.cgipath + status_list[item.m_status];
                 item._init = '';
-                json_data = Json.toString(item);
-                item_list = [json_data];
-				new Ajax( url , {
+                json_data = Json.toString([item]);
+
+				var ajax = new Ajax( url , {
 					method:'post',
-					data: item_list,
+					data: json_data,
 					onComplete: function(){
 						var sk = new Skalde();
 						sk.pull();
 					}
-				}).request();
+				});
+	            ajax.setHeader('If-Modified-Since','0');
+                ajax.request();
 			},this);
 		}
 
