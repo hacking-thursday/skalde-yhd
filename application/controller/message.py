@@ -19,7 +19,7 @@ class MessageController(BaseController):
         data = user_data
         message = Message(data=user_data)
         message.put()
-        message.data = data
+        message.data['m_id'] = message.key()
         message.put()
 
     def delete(self):
