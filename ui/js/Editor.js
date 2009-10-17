@@ -34,18 +34,21 @@ Editor = function ( options )
 
   $$('#editordiv').each( function(item){item.remove();});
   this.view = new Element('div').injectInside(document.documentElement);
+  this.view.setProperty('id', 'editordiv' );
   this.view.injectInside( $('wall') );
   this.view.setHTML('\
 <div id="msgbox" style="display:block;">\
 		  <form id="editor" name="editor">inputs ur msg</form>\
 </div>\
   ');
-	var oCKeditor = CKEDITOR.replace( 'editor',
-				{
-					// Defines a simpler toolbar to be used in this sample.
-					// Note that we have added out "MyButton" button here.
-					toolbar : [ [ 'Bold', 'Italic', 'Underline', 'Strike','-','Link' ] ]
-				});
+
+	var oCKeditor = CKEDITOR.replace( 'editor' );
+//	var oCKeditor = CKEDITOR.replace( 'editor',
+//				{
+//					// Defines a simpler toolbar to be used in this sample.
+//					// Note that we have added out "MyButton" button here.
+//					toolbar : [ [ 'Bold', 'Italic', 'Underline', 'Strike','-','Link' ] ]
+//				});
 
 
 
@@ -55,12 +58,11 @@ Editor = function ( options )
   //oFCKeditor.Height	= 120;
   //oFCKeditor.Width	= 300 ;
   //oFCKeditor.Value	= '請輸入你的留言' ;
-  if( this.view.getElementsBySelector('#postit_txt').length )
-  {
-      this.view.getElementsBySelector('#postit_txt')[0].setHTML( oCKeditor.CreateHtml() );
-  }
+  //if( this.view.getElementsBySelector('#postit_txt').length )
+  //{
+  //    this.view.getElementsBySelector('#postit_txt')[0].setHTML( oCKeditor.CreateHtml() );
+  //}
 
-  this.view.setProperty('id', 'editordiv' );
   this.view.setStyle('position', 'absolute' );
   this.view.setStyle('width', 350 );
   this.view.setStyle('left', this.left );
@@ -68,22 +70,22 @@ Editor = function ( options )
   this.view.setStyle('opacity', 0.8 );
 
   //this.view.getElementByID('button').addEvent('click', this.submit.bind(this) );
-  $('apply').addEvent('click', this.submit.bindWithEvent(this) );
-  $('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
+  //$('apply').addEvent('click', this.submit.bindWithEvent(this) );
+  //$('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
   //$('editor').addEvent('submit', function(evt){ (new Event(evt)).stop(); } );
   $('editor').addEvent('submit', this.submit.bind(this) );
 
-  $('postit_author').addEvent('click', function( evt ){ 
-      var event = new Event( evt );
-      event.stop();
+  //$('postit_author').addEvent('click', function( evt ){ 
+  //    var event = new Event( evt );
+  //    event.stop();
 
-      this.focus(); 
-          if( this.getProperty('value') == "你的名字" )
-      {
-    	  this.setProperty('value','');
-      }
-  
-  } );
+  //    this.focus(); 
+  //        if( this.getProperty('value') == "你的名字" )
+  //    {
+  //  	  this.setProperty('value','');
+  //    }
+  //
+  //} );
 
   var drag = new Drag.Move( this.view, {
 	  container: $('wall'), 
@@ -156,7 +158,7 @@ Editor.prototype.submit = function ( evt )
 	event.stop();
 
 	var form = $('editor');
-	var oEditor = CKeditorAPI.GetInstance('postit_content') ;
+	//var oEditor = CKeditorAPI.GetInstance('postit_content') ;
 
 	var input = oEditor.EditorDocument.body.innerHTML.slice( 3, -8);
 	//console.log(input);
