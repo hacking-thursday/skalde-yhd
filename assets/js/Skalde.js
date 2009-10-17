@@ -23,7 +23,7 @@ Skalde.prototype._init = function ()
   /**Aggregations: */
 
   /**Compositions: */
-  this.cgipath = "/cgi-bin/json";
+  this.cgipath = "/message/create";
 }
 
 
