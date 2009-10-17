@@ -89,12 +89,12 @@ Window.addEvent('start',function(){
 				{
 					this.setStyle('cursor', '-moz-grab');
 				}
-				//scroll_drag.stop();
+				scroll_drag.stop();
 			},
 
 			'mouseout': function(ev) {
 				this.setStyle('cursor', 'default');
-				//scroll_drag.stop();
+				scroll_drag.stop();
 			}
 		});
 

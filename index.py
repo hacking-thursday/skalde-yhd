@@ -32,7 +32,6 @@ class Message(webapp.RequestHandler):
         elif action == 'delete':
             self.delete(json)
     def post(self, action):
-        logging.debug(self.request.body)
         json = simplejson.loads(urllib.unquote(self.request.body))
         if action == 'create':
             self.create(json)
@@ -46,7 +45,6 @@ class Message(webapp.RequestHandler):
         for item in json:
             data = Data()
             data.put()
-            logging.debug(item['m_id'])
             item['m_id'] = str(data.key())
 
             data.json = pickle.dumps(item)
