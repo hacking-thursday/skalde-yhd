@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import logging, os
+import logging, os, pickle, urllib
+from django.utils import simplejson
 from google.appengine.ext import db, webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 class Data(db.Model):
-    pass
+    json = db.BlobProperty()
 
 class Main(webapp.RequestHandler):
     def get(self):
@@ -19,34 +20,60 @@ class Main(webapp.RequestHandler):
 
 class Message(webapp.RequestHandler):
     def get(self, action):
+        json = simplejson.loads(urllib.unquote(self.request.query_string)) if self.request.query_string else None
         if action == 'create':
-            self.create(self.request.query_string)
+            self.create(json)
         elif action == 'read':
-            self.read(self.request.query_string)
+            self.read()
         elif action == 'update':
-            self.update(self.request.query_string)
+            self.update(json)
         elif action == 'delete':
-            self.delete(self.request.query_string)
+            self.delete(json)
     def post(self, action):
+        json = simplejson.loads(self.request.body)
         if action == 'create':
-            self.create(self.request.body)
+            self.create(json)
         elif action == 'read':
-            self.read(self.request.body)
+            self.read()
         elif action == 'update':
-            self.update(self.request.body)
+            self.update(json)
         elif action == 'delete':
-            self.delete(self.request.body)
+            self.delete(json)
     def create(self, json):
-        self.response.out.write('Content-Type: text/plain\n\ncreate' + json)
-    def read(self, json):
-        self.response.out.write('Content-Type: text/plain\n\nread' + json)
+        for item in json:
+            data = Data()
+            item['m_id'] = str(data.put())
+            logging.debug(item)
+            data.json = pickle.dumps(item)
+            data.put()
+        self.response.out.write('0')
+    def read(self):
+        datum = Data.all().fetch(1000)
+        if len(datum) == 0:
+            return
+        output = '['
+        for item in datum:
+            raw = pickle.loads(item.json)
+            output = output + simplejson.dumps(raw) + ','
+        output = output[:-1] + ']'
+        self.response.out.write(output)
     def update(self, json):
-        self.response.out.write('Content-Type: text/plain\n\nupdate' + json)
+        for item in json:
+            data = Data.get(item['m_id'])
+            if data is not None:
+                data.json = pickle.dumps(item)
+                data.put()
+        self.response.out.write('0')
     def delete(self, json):
-        self.response.out.write('Content-Type: text/plain\n\ndelete' + json)
+        for item in json:
+            data = Data.get(item['m_id'])
+            if data is not None:
+                data.delete()
+        self.response.out.write('0')
 
 application = webapp.WSGIApplication([
     ('/', Main),
+    ('/message/(.*)/(.*)', Message),
     ('/message/(.*)', Message),
     ], debug=True)
 
