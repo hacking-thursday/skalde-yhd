@@ -34,35 +34,24 @@ Editor = function ( options )
 
   $$('#editordiv').each( function(item){item.remove();});
   this.view = new Element('div').injectInside(document.documentElement);
+  this.view.setProperty('id', 'editordiv' );
   this.view.injectInside( $('wall') );
   this.view.setHTML('\
 <div id="msgbox" style="display:block;">\
-        <div id="msgbox_t" style="z-index:1;">\
-                <div id="msgbox_tl">\
-		<div id="msgbox_tr">\
-		</div>\
-                </div>\
-        </div>\
-        <div id="msgbox_m" style="z-index:3;">\
-                <div id="msgbox_ml">\
-		<div id="msgbox_mr">\
 		  <form id="editor" name="editor">inputs ur msg</form>\
-		</div>\
-                </div>\
-        </div>\
-        <div id="msgbox_b" style="z-index:1;">\
-                <div id="msgbox_bl">\
-                        <div id="msgbox_br"></div>\
-                </div>\
-        </div>\
 </div>\
   ');
-	var oCKeditor = CKEDITOR.replace( 'editor',
-				{
-					// Defines a simpler toolbar to be used in this sample.
-					// Note that we have added out "MyButton" button here.
-					toolbar : [ [ 'Bold', 'Italic', 'Underline', 'Strike','-','Link' ] ]
-				});
+
+  if ( CKEDITOR.instances.editor ){
+	  delete CKEDITOR.instances.editor;
+  }
+	var oCKeditor = CKEDITOR.replace( 'editor' );
+//	var oCKeditor = CKEDITOR.replace( 'editor',
+//				{
+//					// Defines a simpler toolbar to be used in this sample.
+//					// Note that we have added out "MyButton" button here.
+//					toolbar : [ [ 'Bold', 'Italic', 'Underline', 'Strike','-','Link' ] ]
+//				});
 
 
 
@@ -72,43 +61,34 @@ Editor = function ( options )
   //oFCKeditor.Height	= 120;
   //oFCKeditor.Width	= 300 ;
   //oFCKeditor.Value	= '請輸入你的留言' ;
-  if( this.view.getElementsBySelector('#postit_txt').length )
-  {
-      this.view.getElementsBySelector('#postit_txt')[0].setHTML( oCKeditor.CreateHtml() );
-  }
+  //if( this.view.getElementsBySelector('#postit_txt').length )
+  //{
+  //    this.view.getElementsBySelector('#postit_txt')[0].setHTML( oCKeditor.CreateHtml() );
+  //}
 
-  this.view.setProperty('id', 'editordiv' );
   this.view.setStyle('position', 'absolute' );
   this.view.setStyle('width', 350 );
   this.view.setStyle('left', this.left );
   this.view.setStyle('top', this.top );
   this.view.setStyle('opacity', 0.8 );
 
-  if( window.ie )
-  {
-      this.view.getElementsBySelector('#msgbox_b').setStyle('display','none');
-      this.view.getElementsBySelector('#msgbox_t').setStyle('display','none');
-      this.view.getElementsBySelector('#msgbox_b').setStyle('margin',0);
-      this.view.getElementsBySelector('#msgbox_t').setStyle('margin',0);
-  }
-
   //this.view.getElementByID('button').addEvent('click', this.submit.bind(this) );
-  $('apply').addEvent('click', this.submit.bindWithEvent(this) );
-  $('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
+  //$('apply').addEvent('click', this.submit.bindWithEvent(this) );
+  //$('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
   //$('editor').addEvent('submit', function(evt){ (new Event(evt)).stop(); } );
   $('editor').addEvent('submit', this.submit.bind(this) );
 
-  $('postit_author').addEvent('click', function( evt ){ 
-      var event = new Event( evt );
-      event.stop();
+  //$('postit_author').addEvent('click', function( evt ){ 
+  //    var event = new Event( evt );
+  //    event.stop();
 
-      this.focus(); 
-          if( this.getProperty('value') == "你的名字" )
-      {
-    	  this.setProperty('value','');
-      }
-  
-  } );
+  //    this.focus(); 
+  //        if( this.getProperty('value') == "你的名字" )
+  //    {
+  //  	  this.setProperty('value','');
+  //    }
+  //
+  //} );
 
   var drag = new Drag.Move( this.view, {
 	  container: $('wall'), 
@@ -181,7 +161,7 @@ Editor.prototype.submit = function ( evt )
 	event.stop();
 
 	var form = $('editor');
-	var oEditor = CKeditorAPI.GetInstance('postit_content') ;
+	//var oEditor = CKeditorAPI.GetInstance('postit_content') ;
 
 	var input = oEditor.EditorDocument.body.innerHTML.slice( 3, -8);
 	//console.log(input);
