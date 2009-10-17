@@ -9,6 +9,8 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 class Data(db.Model):
     json = db.BlobProperty()
+    created = db.DateTimeProperty(auto_now_add=True)
+    updated = db.DateTimeProperty(auto_now=True)
 
 class Main(webapp.RequestHandler):
     def get(self):
@@ -43,12 +45,11 @@ class Message(webapp.RequestHandler):
         for item in json:
             data = Data()
             item['m_id'] = str(data.put())
-            logging.debug(item)
             data.json = pickle.dumps(item)
             data.put()
         self.response.out.write('0')
     def read(self):
-        datum = Data.all().fetch(1000)
+        datum = Data.all().order('-updated').fetch(1000)
         if len(datum) == 0:
             return
         output = '['
