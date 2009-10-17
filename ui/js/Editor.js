@@ -37,24 +37,7 @@ Editor = function ( options )
   this.view.injectInside( $('wall') );
   this.view.setHTML('\
 <div id="msgbox" style="display:block;">\
-        <div id="msgbox_t" style="z-index:1;">\
-                <div id="msgbox_tl">\
-		<div id="msgbox_tr">\
-		</div>\
-                </div>\
-        </div>\
-        <div id="msgbox_m" style="z-index:3;">\
-                <div id="msgbox_ml">\
-		<div id="msgbox_mr">\
 		  <form id="editor" name="editor">inputs ur msg</form>\
-		</div>\
-                </div>\
-        </div>\
-        <div id="msgbox_b" style="z-index:1;">\
-                <div id="msgbox_bl">\
-                        <div id="msgbox_br"></div>\
-                </div>\
-        </div>\
 </div>\
   ');
 	var oCKeditor = CKEDITOR.replace( 'editor',
@@ -83,14 +66,6 @@ Editor = function ( options )
   this.view.setStyle('left', this.left );
   this.view.setStyle('top', this.top );
   this.view.setStyle('opacity', 0.8 );
-
-  if( window.ie )
-  {
-      this.view.getElementsBySelector('#msgbox_b').setStyle('display','none');
-      this.view.getElementsBySelector('#msgbox_t').setStyle('display','none');
-      this.view.getElementsBySelector('#msgbox_b').setStyle('margin',0);
-      this.view.getElementsBySelector('#msgbox_t').setStyle('margin',0);
-  }
 
   //this.view.getElementByID('button').addEvent('click', this.submit.bind(this) );
   $('apply').addEvent('click', this.submit.bindWithEvent(this) );
