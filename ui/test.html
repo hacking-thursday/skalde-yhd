@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Skalde</title>
+	
+	<script type="text/javascript" src="./lib/mootools.js"></script>
+	<script type="text/javascript" src="./lib/js/moodalbox.js"></script>
+	<script type="text/javascript" src="./lib/singleton.js"></script>
+	<script type="text/javascript" src="./lib/server.js"></script>
+	<script type="text/javascript" src="./skalde.js"></script>
+	<script type="text/javascript" src="./lib/fckeditor/fckeditor.js"></script>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/skalde.css" />
+	<link rel="stylesheet" href="/lib/css/moodalbox.css" type="text/css" media="screen" />
+	<script>
+
+	function dummyMessage(){
+		var message = new Message;
+
+		message.m_content = "Hello world";
+		message.m_author= "guestXXXX";
+
+		// Remember to adjust time unit to sec
+		message.m_date = Math.round( (new Date).getTime()/1000 );      
+		message.m_status = "new";
+		message.bubble = true;
+		message.m_x= 20;
+		message.m_y= -70;
+		message.m_z= "1";
+		message.m_width= "100";
+		message.m_height= "50";
+
+		var skalde = new Skalde();                                                               
+		skalde.addPostit( message );
+		skalde.push();
+	}
+	</script>
+</head>
+<body>
+
+
+<input id="sent request" type="button" onclick="dummyMessage();" />
+<div id="screen">
+	<div id="wall" onmousedown="event.preventDefault()"></div>
+</div>
+
+</body>
+</html>
