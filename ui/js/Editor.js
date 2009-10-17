@@ -37,8 +37,12 @@ Editor = function ( options )
   this.view.setProperty('id', 'editordiv' );
   this.view.injectInside( $('wall') );
   this.view.setHTML('\
-<div id="msgbox" style="display:block;">\
-		  <form id="editor" name="editor">inputs ur msg</form>\
+<div id="msgbox" style="display:block;"> \
+		  <form id="editor_form" method="post" name="editor_form"> \
+			<input name="postit_author" type="text" value="請填入姓名" /> \
+			<input id="apply" type="button" /> \
+			<textarea name="editor">&lt;p&gt;Initial value.&lt;/p&gt;</textarea> \
+	          </form>\
 </div>\
   ');
 
@@ -73,10 +77,10 @@ Editor = function ( options )
   this.view.setStyle('opacity', 0.8 );
 
   //this.view.getElementByID('button').addEvent('click', this.submit.bind(this) );
-  //$('apply').addEvent('click', this.submit.bindWithEvent(this) );
+  $('apply').addEvent('click', this.submit.bindWithEvent(this) );
   //$('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
   //$('editor').addEvent('submit', function(evt){ (new Event(evt)).stop(); } );
-  $('editor').addEvent('submit', this.submit.bind(this) );
+  //$('editor').addEvent('submit', this.submit.bind(this) );
 
   //$('postit_author').addEvent('click', function( evt ){ 
   //    var event = new Event( evt );
@@ -107,13 +111,11 @@ Editor = function ( options )
 		  this.top = wall_pos.top;
 		  this.x = real_xy.x;
 		  this.y = real_xy.y;
-			consol.log(1);
 	  }.bind(this)
   });
 
   this.view.addEvent('click', function(e){
 	  var event = new Event(e);
-			consol.log(2);
 
 	  // Stop this event from propagating to Wall and trigger another Editor
 	  event.stop();
@@ -160,17 +162,19 @@ Editor.prototype.submit = function ( evt )
 	var event = new Event( evt );
 	event.stop();
 
-	var form = $('editor');
-	//var oEditor = CKeditorAPI.GetInstance('postit_content') ;
+	var input = ""
 
-	var input = oEditor.EditorDocument.body.innerHTML.slice( 3, -8);
-	//console.log(input);
-
+	if ( CKEDITOR.instances.editor ){
+		input = CKEDITOR.instances.editor.getData() ;
+	}
+	
 	if( input == "請輸入你的留言" || input == "" )
 	{
 		//console.log( '請編輯留言' );
 		return;
 	}
+
+	var form = $('editor_form');
 
 	if( !form.postit_author.value || form.postit_author.value == "你的名字" )
 	{
