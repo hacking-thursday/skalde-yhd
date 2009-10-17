@@ -13,7 +13,7 @@ class MessageController(BaseController):
         3. return json
         """
         data = self.params['json']
-        pass
+        self.data = data
 
     def delete(self):
         pass
