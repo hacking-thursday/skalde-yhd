@@ -119,13 +119,11 @@ Editor = function ( options )
 		  this.top = wall_pos.top;
 		  this.x = real_xy.x;
 		  this.y = real_xy.y;
-			consol.log(1);
 	  }.bind(this)
   });
 
   this.view.addEvent('click', function(e){
 	  var event = new Event(e);
-			consol.log(2);
 
 	  // Stop this event from propagating to Wall and trigger another Editor
 	  event.stop();
