@@ -29,6 +29,9 @@ handlers:
 - url: /
   static_files: ui/index.html
   upload: ui/index.html
+- url: /test.html
+  static_files: ui/test.html
+  upload: ui/index.html
 - url: /skalde.js
   static_files: ui/skalde.js
   upload: ui/skalde.js
