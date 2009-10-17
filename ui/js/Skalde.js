@@ -201,7 +201,7 @@ Skalde.prototype.updatePostit = function (id, data)
  */
 Skalde.prototype.pull = function ()
 {
-	var ajax = new Ajax( this.cgipath + 'list', {
+	var ajax = new Ajax( this.cgipath + 'read', {
 		method:'get',
 		onComplete: function(response){
 			var result = Json.evaluate( response );
@@ -228,14 +228,16 @@ Skalde.prototype.push = function(){
 		var other_list = this.m_postits.filter( function( item ){
 			return ( status_need.indexOf(item.m_status) > -1 );
 		});
-
 		if( other_list.length > 0 )
 		{
 			other_list.each( function(item){
                 var url = this.cgipath + status_list[item.m_status];
+                item._init = '';
+                console.log(url);
+                console.log(item);
 				new Ajax( url , {
 					method:'post',
-					data: query,
+					data: Json.toString(item),
 					onComplete: function(){
 						var sk = new Skalde();
 						sk.pull();
