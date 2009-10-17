@@ -32,7 +32,8 @@ class Message(webapp.RequestHandler):
         elif action == 'delete':
             self.delete(json)
     def post(self, action):
-        json = simplejson.loads(self.request.body)
+        logging.debug(self.request.body)
+        json = simplejson.loads(urllib.unquote(self.request.body))
         if action == 'create':
             self.create(json)
         elif action == 'read':
@@ -44,7 +45,10 @@ class Message(webapp.RequestHandler):
     def create(self, json):
         for item in json:
             data = Data()
-            item['m_id'] = str(data.put())
+            data.put()
+            logging.debug(item['m_id'])
+            item['m_id'] = str(data.key())
+
             data.json = pickle.dumps(item)
             data.put()
         self.response.out.write('0')
