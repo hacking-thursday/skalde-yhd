@@ -189,7 +189,7 @@ Editor.prototype.submit = function ( evt )
 	message.m_author= form.postit_author.value ;
 	// Remember to adjust time unit to sec
 	message.m_date = Math.round( (new Date).getTime()/1000 ); 
-	message.m_status = "new";
+	message.m_status = "add";
 	message.bubble = true;
 	message.m_x= this.x +20;
 	message.m_y= this.y -70;
