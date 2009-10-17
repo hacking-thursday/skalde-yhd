@@ -233,11 +233,11 @@ Skalde.prototype.push = function(){
 			other_list.each( function(item){
                 var url = this.cgipath + status_list[item.m_status];
                 item._init = '';
-                console.log(url);
-                console.log(item);
+                item_list = [];
+                item_list.append(Json.toString(item));
 				new Ajax( url , {
 					method:'post',
-					data: Json.toString(item),
+					data: item_list,
 					onComplete: function(){
 						var sk = new Skalde();
 						sk.pull();
