@@ -12,8 +12,8 @@ class MessageController(BaseController):
         2. use model to save
         3. return json
         """
-        data = self.params['json']
-        self.data = data
+        data = self.to_json(self.params['json'])
+        self.render(data)
 
     def delete(self):
         pass
