@@ -87,7 +87,6 @@ Skalde.prototype.getPostit = function (id)
  */
 Skalde.prototype.addPostit = function (data)
 {
-    data.m_content = decode64(data.m_content);
 	if( !data.m_id )
 	{
 		var lowest = -1;
@@ -206,6 +205,11 @@ Skalde.prototype.pull = function ()
 		method:'get',
 		onComplete: function(response){
 			var result = Json.evaluate( response);
+
+			result.each( function( item ){
+				item.m_content = decode64(item.m_content);
+			}); 
+
 			result.each( this.addPostit, this );
 			this.update.delay( 1000,this);
 		}.bind(this)
