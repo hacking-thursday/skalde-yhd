@@ -39,7 +39,7 @@ Editor = function ( options )
   this.view.setHTML('\
 <div id="msgbox" style="display:block;"> \
 		  <form id="editor_form" method="post" name="editor_form"> \
-			<input name="postit_author" type="text" value="請填入姓名" /> \
+			<input id="postit_author" name="postit_author" type="text" value="你的名字" /> \
 			<input id="apply" type="button" value="留言" /> <input id="cancel" type="button" value="取消" /> \
 			<textarea name="editor">&lt;p&gt;Initial value.&lt;/p&gt;</textarea> \
 	          </form>\
@@ -84,17 +84,17 @@ Editor = function ( options )
   //$('editor').addEvent('submit', function(evt){ (new Event(evt)).stop(); } );
   //$('editor').addEvent('submit', this.submit.bind(this) );
 
-  //$('postit_author').addEvent('click', function( evt ){ 
-  //    var event = new Event( evt );
-  //    event.stop();
+  $('postit_author').addEvent('click', function( evt ){ 
+      var event = new Event( evt );
+      event.stop();
 
-  //    this.focus(); 
-  //        if( this.getProperty('value') == "你的名字" )
-  //    {
-  //  	  this.setProperty('value','');
-  //    }
-  //
-  //} );
+      this.focus(); 
+          if( this.getProperty('value') == "你的名字" )
+      {
+    	  this.setProperty('value','');
+      }
+  
+  } );
 
   var drag = new Drag.Move( this.view, {
 	  container: $('wall'), 
