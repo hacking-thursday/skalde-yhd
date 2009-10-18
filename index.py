@@ -21,18 +21,17 @@ class Main(webapp.RequestHandler):
         self.response.out.write(template.render(path, None))
 
 class Message(webapp.RequestHandler):
+    '''Message Data Backend'''
     def get(self, action):
+        '''Redirect GET reguest'''
         json = simplejson.loads(urllib.unquote(self.request.query_string)) if self.request.query_string else None
-        if action == 'create':
-            self.create(json)
-        elif action == 'read':
-            self.read()
-        elif action == 'update':
-            self.update(json)
-        elif action == 'delete':
-            self.delete(json)
-    def post(self, action):
+        self.dispatcher(action, json)
+    def post(self, action, json):
+        '''Redirect POST reguest'''
         json = simplejson.loads(urllib.unquote(self.request.body))
+        self.dispatcher(action, json)
+    def dispatcher(self, action, json=None):
+        '''Dispatcher by action'''
         if action == 'create':
             self.create(json)
         elif action == 'read':
@@ -41,6 +40,8 @@ class Message(webapp.RequestHandler):
             self.update(json)
         elif action == 'delete':
             self.delete(json)
+        else:
+            self.error(404)
     def create(self, json):
         for item in json:
             data = Data()
