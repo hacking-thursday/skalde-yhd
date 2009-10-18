@@ -45,7 +45,7 @@ var MyScroller = Scroller.extend({
 Window.addEvent('start',function(){
 
 	Window._scroll = new Fx.Scroll('screen', {
-		wait: false,
+		wait: true,
 		duration: 2500,
 		offset: {
 			'x': 0,
@@ -98,10 +98,10 @@ Window.addEvent('start',function(){
 			}
 		});
 
-		_scroll.scrollTo( 
+		(function(){_scroll.scrollTo( 
 			$('wall').getSize().size.x/2 - $('screen').getSize().size.x/2, 
 			$('wall').getSize().size.y/2 - $('screen').getSize().size.y/2
-		);
+		) }).delay( 2000 );
 
 	_skalde.pull();
 	_skalde.pull.periodical( 30*1000, _skalde) ;

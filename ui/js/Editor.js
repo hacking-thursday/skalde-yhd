@@ -49,13 +49,15 @@ Editor = function ( options )
   if ( CKEDITOR.instances.editor ){
 	  delete CKEDITOR.instances.editor;
   }
-	var oCKeditor = CKEDITOR.replace( 'editor' );
-//	var oCKeditor = CKEDITOR.replace( 'editor',
-//				{
-//					// Defines a simpler toolbar to be used in this sample.
-//					// Note that we have added out "MyButton" button here.
-//					toolbar : [ [ 'Bold', 'Italic', 'Underline', 'Strike','-','Link' ] ]
-//				});
+	var oCKeditor = CKEDITOR.replace( 'editor',
+				{
+					// Defines a simpler toolbar to be used in this sample.
+					// Note that we have added out "MyButton" button here.
+					toolbar : [ ['Source','-','Bold','Italic','FontSize','TextColor','Underline','Strike','-','Link' ] ]
+				});
+
+	oCKeditor.config.height = 100;
+	oCKeditor.config.width = 350;
 
 
 
@@ -189,7 +191,7 @@ Editor.prototype.submit = function ( evt )
 	message.m_author= form.postit_author.value ;
 	// Remember to adjust time unit to sec
 	message.m_date = Math.round( (new Date).getTime()/1000 ); 
-	message.m_status = "add";
+	message.m_status = "new";
 	message.bubble = true;
 	message.m_x= this.x +20;
 	message.m_y= this.y -70;
