@@ -204,7 +204,7 @@ Skalde.prototype.pull = function ()
 	var ajax = new Ajax( this.cgipath + 'read', {
 		method:'get',
 		onComplete: function(response){
-			var result = Json.evaluate( response );
+			var result = Json.evaluate( decode64(response));
 			result.each( this.addPostit, this );
 			this.update.delay( 1000,this);
 		}.bind(this)
@@ -233,7 +233,7 @@ Skalde.prototype.push = function(){
 			other_list.each( function(item){
                 var url = this.cgipath + status_list[item.m_status];
                 item._init = '';
-                json_data = Json.toString([item]);
+                json_data = Json.toString(encode64([item]));
 
 				var ajax = new Ajax( url , {
 					method:'post',
