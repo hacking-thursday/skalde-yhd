@@ -1,0 +1,229 @@
+body{
+	background: black;
+}
+
+#boardOuter {
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	position: absolute;
+	width: 230px;
+	height: 70%;
+	top: 80px;
+	left: 80px;
+	z-index: 5;
+	margin: 5px auto;
+	padding: 5px 0;
+	-moz-opacity: 0.8;
+	border:20px double #B3D4EF; 
+	background: #EFF8FF;
+}
+
+#board {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background: #EFF8FF;
+	text-align: right;
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+
+#navbar input {
+	margin-left: 0.2em;
+	margin-bottom: 0.2em;
+}
+ 
+body{
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#navbar {
+	text-align:right;
+	background-color: CadetBlue;
+	border-bottom: medium groove;
+	width: 100%;
+}
+
+#navbar a:link, a:visited, a:active, a:hover {
+	color: lightgray;
+	text-decoration: none; 
+}
+
+#navbar *{
+	margin-top: 5px;
+}
+
+#apply, #cancel{
+  margin-left:10px;
+  height:1.5em;
+  margin-bottom: -0.3em;
+}
+
+#screen {
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	/*
+	margin: 10px;
+	*/
+	margin-left: 20px;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	overflow: hidden; 
+	height: 87%; 
+	width: 95%;
+	border: 10px inset;
+	/*
+	border: 1px solid #ddd;
+	*/	
+	position: absolute;
+}
+
+ 
+#wall {
+	width: 3072px;
+	height: 2304px;;
+	background: url(../image/background.jpg) no-repeat;
+	background-position: center;
+	background-color: white;
+	position: relative;
+	/*
+	 * cursor: url(../image/dblclick.ani), auto ;
+	 */
+}
+ 
+.scrolling-postit {
+	/*
+	background: transparent url(../image/bubble.png) top left no-repeat;
+	width: 140px;
+	height: 73px;
+	text-align: center;
+	*/
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	position: absolute;
+}
+ 
+.scrolling-postit h1 { 
+	color: #fff;
+	padding: 25px 0;
+	font-size: 12px;
+}
+
+#msgbox {
+	margin: 0 21px 0px 21px;
+	width: auto;
+	/* -moz-opacity: 0.8; */
+}
+
+#msgbox div {
+	text-align: left;
+}
+
+#msgbox_t {
+	background: url(../image/slice_0_1.png) 0 0 repeat-x;
+}
+
+#msgbox_tl {
+	margin-left:-44px;
+	background: url(../image/slice_0_0.png) 0 0 no-repeat;
+}
+
+#msgbox_tr {
+	margin-right:-45px;
+	height: 44px;
+	overflow: hidden;
+	background: url(../image/slice_0_2.png) 100% 0 no-repeat;
+}
+
+#msgbox_m {
+	background: url(../image/slice_1_1.png) 0 100% repeat;
+}
+
+#msgbox_ml {
+	margin-left:-44px;
+	background: url(../image/slice_1_0.png) 0 100% repeat-y;
+}
+
+#msgbox_mr {
+	margin-right:-45px;
+	padding-left:40px;
+	width: auto;
+	height: auto;
+	background: url(../image/slice_1_2.png) 100% 100% repeat-y;
+}
+
+#msgbox_b {
+	margin-top: -22px;
+	background: url(../image/slice_2_1.png) 0 100% repeat-x;
+}
+
+#msgbox_bl {
+	margin-left:-44px;
+	background: url(../image/slice_2_0.png) 0 100% no-repeat;
+}
+
+#msgbox_br {
+	margin-right:-45px;
+	height: 61px;
+	background: url(../image/slice_2_2.png) 100% 100% no-repeat;
+}
+
+.profile img{
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	margin: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 10px solid;
+}
+
+.profile p{
+	text-align:center;
+	padding: 20px;
+	padding-bottom: 0px;
+}
+
+.thanks img{
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	margin: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 10px solid;
+}
+
+.thanks p{
+	text-align:center;
+	padding: 20px;
+}
+
+.help img{
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	margin: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 10px solid;
+}
+
+.help p{
+	text-align:center;
+	padding: 20px;
+}
