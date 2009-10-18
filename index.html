@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Skalde</title>
+	
+	<script type="text/javascript" src="/lib/mootools.js"></script>
+	<script type="text/javascript" src="/lib/js/moodalbox.js"></script>
+	<script type="text/javascript" src="/lib/singleton.js"></script>
+	<script type="text/javascript" src="/lib/server.js"></script>
+	<script type="text/javascript" src="/skalde.js"></script>
+	<script type="text/javascript" src="/lib/ckeditor/ckeditor.js"></script>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/skalde.css" />
+	<link rel="stylesheet" href="/lib/css/moodalbox.css" type="text/css" media="screen" />
+</head>
+<body>
+
+<div id="navbar">
+<input id="save" type="button" value="更新中"/>
+<input id="slideshow" type="button" value="輪播模式"/>
+|
+<a href="html/help.html" rel="moodalbox 700" title="簡短的使用簡介">使用簡介</a>
+|
+<a href="html/about.html" rel="moodalbox 650" title="關於創作團隊">關於</a>
+|
+<a style="margin-right: 3em;" href="html/thanks.html" rel="moodalbox" title="贊助感謝">感謝</a>
+</div>
+ 
+ 
+<div id="boardOuter">
+<div id="board"></div>
+</div>
+
+<div id="screen">
+	<div id="wall" onmousedown="event.preventDefault()"></div>
+</div>
+
+</body>
+</html>
+
