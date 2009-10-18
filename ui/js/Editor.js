@@ -40,7 +40,7 @@ Editor = function ( options )
 <div id="msgbox" style="display:block;"> \
 		  <form id="editor_form" method="post" name="editor_form"> \
 			<input name="postit_author" type="text" value="請填入姓名" /> \
-			<input id="apply" type="button" /> \
+			<input id="apply" type="button" value="留言" /> <input id="cancel" type="button" value="取消" /> \
 			<textarea name="editor">&lt;p&gt;Initial value.&lt;/p&gt;</textarea> \
 	          </form>\
 </div>\
@@ -80,7 +80,7 @@ Editor = function ( options )
 
   //this.view.getElementByID('button').addEvent('click', this.submit.bind(this) );
   $('apply').addEvent('click', this.submit.bindWithEvent(this) );
-  //$('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
+  $('cancel').addEvent('click', this.cancel.bindWithEvent(this) );
   //$('editor').addEvent('submit', function(evt){ (new Event(evt)).stop(); } );
   //$('editor').addEvent('submit', this.submit.bind(this) );
 
