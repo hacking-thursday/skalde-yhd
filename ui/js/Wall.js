@@ -102,7 +102,7 @@ Wall.prototype.update = function ()
 		);
 
 		var date = new Date( postit.m_date*1000 );
-		var post_html = '<div id="content" style="">'+postit.m_content+'</div> \
+		var post_html = '<div id="content" style=""><center>'+postit.m_content+'</center></div> \
 				<div style="padding-top:0px; padding-left:50px;"> \
 					<span id="who" style="font-weight: bold;font-style:italic;">'+postit.m_author+'</span> \
 					<span id="date" style="font-style:italic;padding-top:7px;position:relative;left:-40px; top:14px;" >'+date.toLocaleDateString()+'</span> \
