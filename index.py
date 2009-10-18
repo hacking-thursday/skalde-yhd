@@ -26,7 +26,7 @@ class Message(webapp.RequestHandler):
         '''Redirect GET reguest'''
         json = simplejson.loads(urllib.unquote(self.request.query_string)) if self.request.query_string else None
         self.dispatcher(action, json)
-    def post(self, action, json):
+    def post(self, action):
         '''Redirect POST reguest'''
         json = simplejson.loads(urllib.unquote(self.request.body))
         self.dispatcher(action, json)
