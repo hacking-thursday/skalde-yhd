@@ -42,14 +42,14 @@ Board.prototype.update = function ()
 {
 	this.m_view.empty();
 	this.m_view.setHTML("");
-	//if( $$('#save').length){
-	//	$('save').removeEvents('click');
-	//	$('save').addEvent('click', function(evt){
-	//			new Event(evt).stop();
-	//			var sk = new Skalde();
-	//			sk.push();
-	//	});
-	//}
+	if( $$('#save').length){
+		$('save').removeEvents('click');
+		$('save').addEvent('click', function(evt){
+				new Event(evt).stop();
+				var sk = new Skalde();
+				sk.push();
+		});
+	}
 
 	if( this.slideshow )
 	{
