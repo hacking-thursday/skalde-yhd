@@ -1,0 +1,7 @@
+setup_for_linux.sh:
+  這個檔案在幫助 linuxer 下載 google appengine 的套件並解壓縮
+  簡省安裝工具的解說及手續
+
+launch.sh:
+  執行這個檔案即可啟動 server 至 http://localhost:8080
+  可以幫助開發者省下記憶指令及參數的功夫
