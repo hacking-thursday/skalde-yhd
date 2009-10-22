@@ -1,0 +1,4 @@
+yntax: regexp
+\.orig
+\.swp
+^scripts/google_appengine.*
