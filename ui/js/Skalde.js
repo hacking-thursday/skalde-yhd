@@ -156,39 +156,20 @@ Skalde.prototype.delPostit = function (id)
 Skalde.prototype.editPostit = function (id, data)
 {
 	this.m_postits.each( function(item){
+
 		if( item.m_id == id )
 		{
 			var old = item;
+			
+			// 取代成新的資料
 			item = data;
+
+			// 繼承原序號
 			item.m_id = old.m_id;
+
+			// 設定狀態為 "changed"
 			item.m_status = "changed"
-			item.m_x = old.m_x;
-			item.m_y = old.m_y;
-			item.m_z = old.m_z;
-			item.m_width = old.m_width;
-			item.m_height = old.m_height;
-		}
-	});
-}
 
-
-/**
- * 將指定的物件編號的物件對照指定的 Postit 物件作更新。只改變位置，不改變資料。
- * @param id
-    *      物件編號
- * @param data
-    *      存放新的狀態的資料物件
- */
-Skalde.prototype.updatePostit = function (id, data)
-{
-	this.m_postits.each( function(item){
-		if( item.m_id == id )
-		{
-			item.m_x = data.m_x;
-			item.m_y = data.m_y;
-			item.m_z = data.m_z;
-			item.m_width = data.m_width;
-			item.m_height = data.m_height;
 		}
 	});
 }
